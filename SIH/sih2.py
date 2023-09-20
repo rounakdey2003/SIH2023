@@ -4,24 +4,28 @@ from dotenv import load_dotenv
 import streamlit as st
 import streamlit_option_menu as option_menu
 import requests
-from streamlit_lottie import st_lottie
 from PIL import Image
 
+gange_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/gange.png'
 slide2_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/slide2.png'
 slide3_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/slide1.png'
-
+gange = Image.open(gange_loc)
 slide2 = Image.open(slide2_loc)
 slide3 = Image.open(slide3_loc)
 
 st.set_page_config(layout="wide")
-def lottie_url(url):
-    request = requests.get(url)
-    if request.status_code != 200:
-        return None
-    return request.json()
 
-lt_siri = lottie_url("https://lottie.host/7503d066-a7e4-4303-8b99-13d60f72d1a2/ghkg9nhmxo.json")
-lt_soon = lottie_url("https://lottie.host/a1eee7b1-cc91-4e1a-96b4-f6d8f7ef7de6/Myo4fYMbcC.json")
+bg_image = """
+                <style>
+                [data-testid = "stAppViewContainer"] > .main {
+                background-image: url("https://i.pinimg.com/originals/a7/9e/69/a79e69f1e792d396467b4a49f52f6497.gif");
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-attachment: local;
+                }
+                </style>
+                """
+st.markdown(bg_image, unsafe_allow_html=True)
 
 st.title("Chacha Chowdhury")
 st.write('''Hello I'm Chacha Chowdhury, 
@@ -45,13 +49,19 @@ with st.container():
                 st.write("##")
                 st.title("Welcome to :rainbow[*Chat Area*]")
                 st.write("Designed for Namami Gange")
-                st_lottie(lt_siri)
+                #st_lottie(lt_image)
+                st.write("##")
+                st.write("##")
 
+                st.image(gange)
+
+                st.write("##")
+                st.write("##")
+                
 
             with col2:
                 st.write("##")
                 st.write("##")
-
                 def main():
                     load_dotenv()
 
@@ -67,7 +77,6 @@ with st.container():
                             response = agent.run(user_question)
                             st.write(f"Your have asked: {user_question}")
 
-
                 if __name__ == "__main__":
                     main()
 
@@ -79,6 +88,12 @@ with st.container():
                 st.title(":rainbow[*Overview*]")
                 st.write("##")
                 st.image(slide2)
+                st.write("##")
+                st.write("##")
+                st.write("##")
+                st.write("##")
+                st.write("##")
+                st.write("##")
 
             with col2:
                 st.write("##")
@@ -86,6 +101,7 @@ with st.container():
                 st.write("##")
                 st.write("##")
                 st.image(slide3)
+
 
     if menu == 'About Us':
         with st.container():
@@ -118,8 +134,7 @@ with st.container():
             col5, col6 = st.columns(2)
 
             with col5:
-                #st.title(":rainbow[Coming Soon]")
-                st_lottie(lt_soon)
+                st.title(":rainbow[Coming Soon]")
 
 st.write("##")
 st.write("---")

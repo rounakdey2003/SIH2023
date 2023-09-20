@@ -1,31 +1,29 @@
+import pandas as pd
 from langchain.agents import create_csv_agent
 from langchain.llms import OpenAI
 from dotenv import load_dotenv
 import streamlit as st
 import streamlit_option_menu as option_menu
 import requests
+from streamlit_lottie import st_lottie
 from PIL import Image
+import plotly.express as px
 
-gange_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/gange.png'
 slide2_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/slide2.png'
 slide3_loc = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/slide1.png'
-gange = Image.open(gange_loc)
+
 slide2 = Image.open(slide2_loc)
 slide3 = Image.open(slide3_loc)
 
 st.set_page_config(layout="wide")
+def lottie_url(url):
+    request = requests.get(url)
+    if request.status_code != 200:
+        return None
+    return request.json()
 
-bg_image = """
-                <style>
-                [data-testid = "stAppViewContainer"] > .main {
-                background-image: url("https://i.pinimg.com/originals/a7/9e/69/a79e69f1e792d396467b4a49f52f6497.gif");
-                background-size: 100%;
-                background-repeat: no-repeat;
-                background-attachment: local;
-                }
-                </style>
-                """
-st.markdown(bg_image, unsafe_allow_html=True)
+lt_siri = lottie_url("https://lottie.host/7503d066-a7e4-4303-8b99-13d60f72d1a2/ghkg9nhmxo.json")
+lt_soon = lottie_url("https://lottie.host/a1eee7b1-cc91-4e1a-96b4-f6d8f7ef7de6/Myo4fYMbcC.json")
 
 st.title("Chacha Chowdhury")
 st.write('''Hello I'm Chacha Chowdhury, 
@@ -33,10 +31,10 @@ st.write('''Hello I'm Chacha Chowdhury,
 st.write("[READ MORE](https://nmcg.nic.in/ )")
 st.write('---')
 
-with st.container():
+with (st.container()):
     menu = option_menu.option_menu(
         menu_title=None,
-        options=['Chat Area', 'Overview', 'About Us', 'Features'],
+        options=['Chat Area', 'Overview', 'About Us', 'Machine Learning Area'],
         icons=['code-slash', 'eye', 'chat-left-text-fill', 'person'],
         orientation='horizontal'
     )
@@ -45,30 +43,28 @@ with st.container():
             col1, col2 = st.columns(2)
 
             with col1:
-                st.write("##")
-                st.write("##")
                 st.title("Welcome to :rainbow[*Chat Area*]")
                 st.write("Designed for Namami Gange")
-                #st_lottie(lt_image)
-                st.write("##")
-                st.write("##")
+                st_lottie(lt_siri)
 
-                st.image(gange)
-
-                st.write("##")
-                st.write("##")
-                
 
             with col2:
                 st.write("##")
                 st.write("##")
+                st.write("##")
+                st.write("##")
+                st.write("##")
+                st.write("##")
+
                 def main():
                     load_dotenv()
 
-                    user_csv = st.file_uploader("Upload Area", type="csv")
+                    user_csv = 'C:/Users/rouna/OneDrive/Documents/WebDevelopmentProject/Python/SIH/assets/dataset.csv'
+
+                    #st.file_uploader("Upload Area", type="csv")
 
                     if user_csv is not None:
-                        user_question = st.text_input("Hii, How can I help you ?")
+                        user_question = st.text_input("Chat Box")
 
                         llm = OpenAI(temperature=0)
                         agent = create_csv_agent(llm, user_csv, verbose=True)
@@ -85,23 +81,20 @@ with st.container():
             col1, col2 = st.columns(2)
 
             with col1:
-                st.title(":rainbow[*Overview*]")
+                st.title("Welcome to :rainbow[*Overview*]")
+                st.write("##")
+                st.write("##")
                 st.write("##")
                 st.image(slide2)
-                st.write("##")
-                st.write("##")
-                st.write("##")
-                st.write("##")
-                st.write("##")
-                st.write("##")
 
             with col2:
                 st.write("##")
                 st.write("##")
                 st.write("##")
                 st.write("##")
+                st.write("##")
+                st.write("##")
                 st.image(slide3)
-
 
     if menu == 'About Us':
         with st.container():
@@ -110,6 +103,8 @@ with st.container():
             with col3:
                 st.write("##")
                 st.header("*INTRODUCTION*")
+                st.write("##")
+                st.write("##")
                 st.write('''\n:rainbow[**Chacha Chaudhary**] was declared the mascot of the :rainbow[Namami Gange Programme] at the 37th Executive Committee meeting of the National Mission for Clean Ganga (NMCG). 
                 \nNMCG has tied up with Diamond Toons to develop and distribute comics, e-comics, and animated videos. 
                 \nThe objective of bringing about behavioral change amongst children towards the Ganga and other rivers. 
@@ -121,6 +116,8 @@ with st.container():
             with col4:
                 st.write("##")
                 st.header("*Important Links*")
+                st.write("##")
+                st.write("##")
                 st.write('''\n1. https://nmcg.nic.in/ 
                 \n2. http://cganga.org/scientific-advisory-committee/ 
                 \n3. http://nihroorkee.gov.in/Gangakosh/ganga.htm 
@@ -129,12 +126,23 @@ with st.container():
                 \n6. https://clap4ganga.com/
                 ''')
 
-    if menu == 'Features':
+    if menu == 'Machine Learning Area':
         with st.container():
             col5, col6 = st.columns(2)
 
             with col5:
-                st.title(":rainbow[Coming Soon]")
+                st.title("Welcome to :rainbow[*Machine Learning Area*]")
+                st.header("Coming Soon!")
+
+            with col6:
+                st.write("##")
+                st.write("##")
+                st.write("##")
+                upload = st.file_uploader('Please upload .csv file', type='csv')
+                if upload:
+                    st.markdown('---')
+                    dataset = pd.read_csv(upload, engine='python')
+                    st.dataframe(dataset)
 
 st.write("##")
 st.write("---")
@@ -150,4 +158,8 @@ if button:
     """)
 
 st.write("---")
-st.write("Version 2")
+st.write("CC version 2")
+
+
+#st.title(":rainbow[Coming Soon]")
+#st_lottie(lt_soon)
