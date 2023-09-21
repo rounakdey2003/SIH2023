@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import streamlit as st
 import streamlit_option_menu as option_menu
 import requests
-from matplotlib import pyplot as plt
 from streamlit_lottie import st_lottie
 from PIL import Image
 import altair as alt
